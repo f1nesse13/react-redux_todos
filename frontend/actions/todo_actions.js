@@ -1,14 +1,12 @@
-const RECEIVE_TODOS = 'RECEIVE_TODOS';
-const RECEIVE_TODO = 'RECEIVE_TODO';
+export const RECEIVE_TODOS = 'RECEIVE_TODOS';
+export const RECEIVE_TODO = 'RECEIVE_TODO';
 
-export const receiveTodos = array => ({
+export const receiveTodos = todos => ({
   type: RECEIVE_TODOS,
-  todos: array
+  todos
 });
 
 export const receiveTodo = todo => ({
   type: RECEIVE_TODO,
   todo
 });
-
-window.receiveTodo = receiveTodo;

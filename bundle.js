@@ -221,8 +221,12 @@ function (_Component) {
   _createClass(TodoDetailView, [{
     key: "render",
     value: function render() {
-      var todo = this.props.todo;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, todo.body));
+      var _this$props = this.props,
+          todo = _this$props.todo,
+          removeTodo = _this$props.removeTodo;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, todo.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: removeTodo.bind(this, todo)
+      }, "Delete"));
     }
   }]);
 
@@ -521,7 +525,8 @@ function (_Component) {
       this.setState({
         details: !this.state.details
       });
-    }
+    } // <button onClick={this.props.removeTodo.bind(this, this.props.todo)}>Delete</button>
+
   }, {
     key: "render",
     value: function render() {
@@ -530,7 +535,8 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         onClick: this.showDetails.bind(this)
       }, this.props.todo.title), this.state.details === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_detail_view__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        todo: this.props.todo
+        todo: this.props.todo,
+        removeTodo: this.props.removeTodo
       }) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.updateTodo.bind(this)
       }, this.props.todo.done === true ? 'Undo' : 'Done'));
@@ -555,10 +561,13 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _todos_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todos_reducer */ "./frontend/reducers/todos_reducer.js");
+/* harmony import */ var _steps_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./steps_reducer */ "./frontend/reducers/steps_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  todos: _todos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  todos: _todos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  steps: _steps_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -567,18 +576,95 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: allTodos */
+/*! exports provided: allTodos, allSteps */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTodos", function() { return allTodos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allSteps", function() { return allSteps; });
 var allTodos = function allTodos(_ref) {
   var todos = _ref.todos;
   return Object.keys(todos).map(function (id) {
     return todos[id];
   });
 };
+var allSteps = function allSteps(_ref2) {
+  var steps = _ref2.steps;
+  return Object.keys(steps).map(function (id) {
+    return steps[id];
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/reducers/steps_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/steps_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var initialState = {
+  1: {
+    // this is the step with id = 1
+    id: 1,
+    title: 'walk to store',
+    done: false,
+    todo_id: 1
+  },
+  2: {
+    // this is the step with id = 2
+    id: 2,
+    title: 'buy soap',
+    done: false,
+    todo_id: 1
+  },
+  3: {
+    id: 3,
+    title: 'walk to the hair store',
+    done: true,
+    todo_id: 2
+  },
+  4: {
+    id: 4,
+    title: 'Buy Shampoo',
+    done: false,
+    todo_id: 2
+  }
+};
+
+var stepsReducer = function stepsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'RECEIVE_STEP':
+      var newStep = _defineProperty({}, action.step.id, action.step);
+
+      return Object.assign({}, state, newStep);
+
+    case 'RECEIVE_STEPS':
+      var nextState = {};
+      action.steps.forEach(function (step) {
+        nextState[step.id] = step;
+      });
+
+    case 'REMOVE_STEP':
+      var newState = Object.assign({}, state);
+      delete newState[action.step.id];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (stepsReducer);
 
 /***/ }),
 
@@ -638,7 +724,6 @@ var todosReducer = function todosReducer() {
   }
 };
 
-window.todosReducer = todosReducer;
 /* harmony default export */ __webpack_exports__["default"] = (todosReducer);
 
 /***/ }),

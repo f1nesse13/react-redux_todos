@@ -36,5 +36,4 @@ const todosReducer = (state = initialState, action) => {
       return state;
   }
 };
-window.todosReducer = todosReducer;
 export default todosReducer;

@@ -19,7 +19,7 @@ class StepListItem extends Component {
         <p>{step.body}</p>
 
         <button onClick={this.toggleStep.bind(this)}>
-          {step.done === true ? 'Undone' : 'Done'}
+          {step.done === true ? 'Undo Step' : 'Finished Step'}
         </button>
 
         <button onClick={removeStep}>Remove Step</button>

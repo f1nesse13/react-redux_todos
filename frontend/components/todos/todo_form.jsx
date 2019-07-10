@@ -24,7 +24,7 @@ class TodoForm extends Component {
         <p>Create a new todo</p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label>
-            Title
+            Todo
             <input
               type="text"
               className="todo-title"
@@ -34,7 +34,7 @@ class TodoForm extends Component {
             />
           </label>
           <label>
-            Body
+            Notes
             <textarea
               className="todo-body"
               value={this.state.body}

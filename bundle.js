@@ -576,24 +576,28 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: allTodos, allSteps */
+/*! exports provided: allTodos, stepsByTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allTodos", function() { return allTodos; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allSteps", function() { return allSteps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepsByTodo", function() { return stepsByTodo; });
 var allTodos = function allTodos(_ref) {
   var todos = _ref.todos;
   return Object.keys(todos).map(function (id) {
     return todos[id];
   });
 };
-var allSteps = function allSteps(_ref2) {
+var stepsByTodo = function stepsByTodo(_ref2, todoid) {
   var steps = _ref2.steps;
-  return Object.keys(steps).map(function (id) {
-    return steps[id];
+  var matchingSteps = {};
+  Object.keys(steps).map(function (id) {
+    if (steps[id].todo_id === todoid) {
+      matchingSteps[id] = steps[id];
+    }
   });
+  return matchingSteps;
 };
 
 /***/ }),

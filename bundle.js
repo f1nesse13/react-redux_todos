@@ -90,17 +90,20 @@
 /*!******************************************!*\
   !*** ./frontend/actions/todo_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_TODOS, RECEIVE_TODO, receiveTodos, receiveTodo */
+/*! exports provided: RECEIVE_TODOS, RECEIVE_TODO, REMOVE_TODO, receiveTodos, receiveTodo, removeTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TODOS", function() { return RECEIVE_TODOS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TODO", function() { return RECEIVE_TODO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TODO", function() { return REMOVE_TODO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTodos", function() { return receiveTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTodo", function() { return receiveTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTodo", function() { return removeTodo; });
 var RECEIVE_TODOS = 'RECEIVE_TODOS';
 var RECEIVE_TODO = 'RECEIVE_TODO';
+var REMOVE_TODO = 'REMOVE_TODO';
 var receiveTodos = function receiveTodos(todos) {
   return {
     type: RECEIVE_TODOS,
@@ -110,6 +113,12 @@ var receiveTodos = function receiveTodos(todos) {
 var receiveTodo = function receiveTodo(todo) {
   return {
     type: RECEIVE_TODO,
+    todo: todo
+  };
+};
+var removeTodo = function removeTodo(todo) {
+  return {
+    type: REMOVE_TODO,
     todo: todo
   };
 };
@@ -327,10 +336,13 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           todos = _this$props.todos,
-          receiveTodo = _this$props.receiveTodo;
+          receiveTodo = _this$props.receiveTodo,
+          removeTodo = _this$props.removeTodo;
       var todoList = todos.map(function (todo) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          todo: todo
+          todo: todo,
+          removeTodo: removeTodo,
+          receiveTodo: receiveTodo
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -376,6 +388,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     receiveTodo: function receiveTodo(todo) {
       return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTodo"])(todo));
+    },
+    removeTodo: function removeTodo(todo) {
+      return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["removeTodo"])(todo));
     }
   };
 };
@@ -395,13 +410,61 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var TodoListItem = function TodoListItem(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    key: props.todo.id
-  }, props.todo.title);
-};
+
+var TodoListItem =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(TodoListItem, _Component);
+
+  function TodoListItem(props) {
+    _classCallCheck(this, TodoListItem);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TodoListItem).call(this, props));
+  }
+
+  _createClass(TodoListItem, [{
+    key: "updateTodo",
+    value: function updateTodo(e) {
+      e.preventDefault();
+      var toggleTodo = Object.assign({}, this.props.todo, {
+        done: !this.props.todo.done
+      });
+      this.props.receiveTodo(toggleTodo);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: this.props.todo.id
+      }, this.props.todo.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.props.removeTodo.bind(this, this.props.todo)
+      }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.updateTodo.bind(this)
+      }, this.props.todo.done === true ? 'Undo' : 'Done'));
+    }
+  }]);
+
+  return TodoListItem;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (TodoListItem);
 
@@ -490,6 +553,11 @@ var todosReducer = function todosReducer() {
         nextState[todo.id] = todo;
       });
       return nextState;
+
+    case 'REMOVE_TODO':
+      var newState = Object.assign({}, state);
+      delete newState[action.todo.id];
+      return newState;
 
     default:
       return state;

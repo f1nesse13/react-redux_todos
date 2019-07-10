@@ -6,10 +6,11 @@ class TodoDetailView extends Component {
   }
 
   render() {
-    const { todo } = this.props;
+    const { todo, removeTodo } = this.props;
     return (
       <ul>
         <li>{todo.body}</li>
+        <button onClick={removeTodo.bind(this, todo)}>Delete</button>
       </ul>
     );
   }

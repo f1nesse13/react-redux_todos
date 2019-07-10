@@ -16,12 +16,16 @@ class TodoListItem extends Component {
   showDetails(e) {
     this.setState({ details: !this.state.details });
   }
-
+  // <button onClick={this.props.removeTodo.bind(this, this.props.todo)}>Delete</button>
   render() {
     return (
       <li key={this.props.todo.id}>
         <h3 onClick={this.showDetails.bind(this)}>{this.props.todo.title}</h3>
-        {this.state.details === true ? <TodoDetailView todo={this.props.todo} /> : ''}
+        {this.state.details === true ? (
+          <TodoDetailView todo={this.props.todo} removeTodo={this.props.removeTodo} />
+        ) : (
+          ''
+        )}
         <button onClick={this.updateTodo.bind(this)}>
           {this.props.todo.done === true ? 'Undo' : 'Done'}
         </button>

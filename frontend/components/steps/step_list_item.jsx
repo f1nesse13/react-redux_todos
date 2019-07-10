@@ -12,14 +12,16 @@ class StepListItem extends Component {
   }
 
   render() {
-    const { removeStep, receiveStep, step } = this.props;
+    const { removeStep, step } = this.props;
     return (
       <div>
-        {step.title}
-        {step.body}
+        <p>{step.title}</p>
+        <p>{step.body}</p>
+
         <button onClick={this.toggleStep.bind(this)}>
           {step.done === true ? 'Undone' : 'Done'}
         </button>
+
         <button onClick={removeStep}>Remove Step</button>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { uniqueId } from '../../../solution_1/frontend/util/id_generator';
+import uniqueId from '../../util/unique_id';
 
 class TodoForm extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class TodoForm extends Component {
   render() {
     return (
       <div className="form">
-        <p>Create a new todo</p>
+        <p>Add Todo</p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label>
             Todo

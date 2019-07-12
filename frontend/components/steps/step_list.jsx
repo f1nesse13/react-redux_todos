@@ -15,8 +15,11 @@ class StepList extends Component {
 
     return (
       <div>
-        <ul>{stepItems}</ul>
-        <StepForm todo_id={todo_id} receiveStep={receiveStep} />
+        <ul>
+          {stepItems}
+          <StepForm todo_id={todo_id} receiveStep={receiveStep} />
+        </ul>
+        {/* <div className="step-form"></div> */}
       </div>
     );
   }

@@ -20,7 +20,7 @@ class StepForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form className="step-form" onSubmit={this.handleSubmit.bind(this)}>
         <label>
           New Step
           <input

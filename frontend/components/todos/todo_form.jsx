@@ -21,10 +21,9 @@ class TodoForm extends Component {
   render() {
     return (
       <div className="form">
-        <p>Add Todo</p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label>
-            Todo
+            Add New Todo
             <input
               type="text"
               className="todo-title"

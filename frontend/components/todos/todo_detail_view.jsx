@@ -8,9 +8,11 @@ class TodoDetailView extends Component {
   render() {
     const { todo, removeTodo } = this.props;
     return (
-      <div>
-        <p>Notes: {todo.body}</p>
-        <div>
+      <div className="steps">
+        <p>
+          <span className="notes-title">Notes:</span> {todo.body}
+        </p>
+        <div className="step-container">
           <StepListContainer todo_id={todo.id} />
         </div>
       </div>

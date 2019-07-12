@@ -14,7 +14,7 @@ class StepListItem extends Component {
   render() {
     const { removeStep, step } = this.props;
     return (
-      <div>
+      <div className="step-list">
         <p>{step.title}</p>
         <p>{step.body}</p>
 

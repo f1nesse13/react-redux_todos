@@ -294,6 +294,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "step-form",
         onSubmit: this.handleSubmit.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "New Step", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -373,10 +374,10 @@ function (_Component) {
           step: step
         });
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stepItems), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_step_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stepItems, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_step_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
         todo_id: todo_id,
         receiveStep: receiveStep
-      }));
+      })));
     }
   }]);
 
@@ -482,7 +483,9 @@ function (_Component) {
       var _this$props = this.props,
           removeStep = _this$props.removeStep,
           step = _this$props.step;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, step.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, step.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "step-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, step.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, step.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.toggleStep.bind(this)
       }, step.done === true ? 'Undo Step' : 'Finished Step'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: removeStep
@@ -579,7 +582,13 @@ function (_Component) {
       var _this$props = this.props,
           todo = _this$props.todo,
           removeTodo = _this$props.removeTodo;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Notes: ", todo.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_steps_step_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "steps"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notes-title"
+      }, "Notes:"), " ", todo.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "step-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_steps_step_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         todo_id: todo.id
       })));
     }
@@ -603,7 +612,7 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _solution_1_frontend_util_id_generator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../solution_1/frontend/util/id_generator */ "./solution_1/frontend/util/id_generator.js");
+/* harmony import */ var _util_unique_id__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/unique_id */ "./frontend/util/unique_id.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -660,7 +669,7 @@ function (_Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var todo = Object.assign({}, this.state, {
-        id: Object(_solution_1_frontend_util_id_generator__WEBPACK_IMPORTED_MODULE_1__["uniqueId"])()
+        id: Object(_util_unique_id__WEBPACK_IMPORTED_MODULE_1__["default"])()
       });
       this.props.receiveTodo(todo);
       this.setState({
@@ -673,9 +682,9 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Create a new todo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Todo", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Add New Todo", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "todo-title",
         name: "title",
@@ -765,7 +774,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
         todos: todos,
         receiveTodo: receiveTodo
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, todoList));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "todo-list"
+      }, todoList));
     }
   }]);
 
@@ -861,7 +872,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TodoListItem).call(this, props));
     _this.state = {
-      details: false
+      details: false,
+      klass: false
     };
     return _this;
   }
@@ -879,17 +891,20 @@ function (_Component) {
     key: "showDetails",
     value: function showDetails(e) {
       this.setState({
-        details: !this.state.details
+        details: !this.state.details,
+        klass: !this.state.klass
       });
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        key: this.props.todo.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        key: this.props.todo.id,
+        className: this.state.klass ? 'expand' : ''
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "expand-todo",
         onClick: this.showDetails.bind(this)
-      }, this.props.todo.title), this.state.details === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_detail_view__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, this.state.klass ? 'Minimize Todo' : 'Expand Todo'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.todo.title), this.state.details === true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_detail_view__WEBPACK_IMPORTED_MODULE_1__["default"], {
         todo: this.props.todo
       }) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.updateTodo.bind(this)
@@ -29318,22 +29333,6 @@ module.exports = function(originalModule) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "./solution_1/frontend/util/id_generator.js":
-/*!**************************************************!*\
-  !*** ./solution_1/frontend/util/id_generator.js ***!
-  \**************************************************/
-/*! exports provided: uniqueId */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uniqueId", function() { return uniqueId; });
-function uniqueId() {
-  return new Date().getTime();
-}
 
 /***/ }),
 
